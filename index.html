@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahaco3 | 个人主页</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* 背景 */
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F9FAFB;
+            --bg-card: #F3F4F6;
+            --bg-accent: #F0FDF4;
+            
+            /* 文字 */
+            --text-primary: #1F2937;
+            --text-secondary: #4B5563;
+            --text-muted: #9CA3AF;
+            
+            /* 强调色 - 薄荷绿系 */
+            --accent-primary: #34D399;
+            --accent-secondary: #10B981;
+            --accent-soft: #6EE7B7;
+            
+            /* 辅助色 - 雾霾蓝 */
+            --blue-soft: #7DD3FC;
+            --blue-muted: #93C5FD;
+            
+            /* 边框 */
+            --border-light: #E5E7EB;
+            --border-accent: #D1FAE5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        /* 导航 */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .nav-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent-secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-secondary);
+        }
+
+        /* 主要内容 */
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+        }
+
+        /* Hero 区域 */
+        .hero {
+            text-align: center;
+            padding: 4rem 0 5rem;
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-primary), var(--blue-soft));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 3rem;
+            color: white;
+            box-shadow: 0 10px 40px rgba(52, 211, 153, 0.2);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero .tagline {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* 区块标题 */
+        section {
+            margin-bottom: 5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: var(--accent-primary);
+            border-radius: 2px;
+        }
+
+        /* 关于我 */
+        .about-card {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid var(--border-light);
+        }
+
+        .about-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .about-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 技能标签 */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .skill-tag {
+            background: var(--bg-accent);
+            color: var(--accent-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid var(--border-accent);
+            transition: all 0.2s;
+        }
+
+        .skill-tag:hover {
+            background: var(--accent-primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* 项目卡片 */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.05);
+            border-color: var(--accent-soft);
+        }
+
+        .project-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .project-tag {
+            background: var(--bg-primary);
+            color: var(--text-muted);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            border: 1px solid var(--border-light);
+        }
+
+        /* 联系方式 */
+        .contact-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-light);
+            transition: all 0.2s;
+        }
+
+        .contact-link:hover {
+            background: var(--bg-accent);
+            color: var(--accent-secondary);
+            border-color: var(--border-accent);
+        }
+
+        /* 页脚 */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-light);
+        }
+
+        /* 响应式 */
+        @media (max-width: 640px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            main {
+                padding: 6rem 1.5rem 3rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 平滑滚动 */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* 选中文字样式 */
+        ::selection {
+            background: var(--accent-soft);
+            color: var(--text-primary);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">ahaco<span>3</span></a>
+            <ul class="nav-links">
+                <li><a href="#about">关于</a></li>
+                <li><a href="#skills">技能</a></li>
+                <li><a href="#projects">项目</a></li>
+                <li><a href="#contact">联系</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero 区域 -->
+        <section class="hero">
+            <div class="avatar">A</div>
+            <h1>你好，我是 Ahaco3</h1>
+            <p class="subtitle">探索者 · 创造者 · 学习者</p>
+            <p class="tagline">热爱技术与设计，在代码与创意之间寻找平衡。这里记录我的学习历程、项目实践与思考。</p>
+        </section>
+
+        <!-- 关于我 -->
+        <section id="about">
+            <h2 class="section-title">关于我</h2>
+            <div class="about-card">
+                <p>欢迎来到我的个人主页！我是一名热爱技术的探索者，喜欢尝试新事物，从编程到设计，从游戏到创作。</p>
+                <p>Wallpaper Engine 是我日常桌面美化的好伙伴，它让我的数字空间始终保持新鲜与活力。我相信好的工具能激发创造力，而整洁美观的环境则能带来清晰的思维。</p>
+                <p>在这里，我会分享我的项目、学习笔记，以及一些生活随想。希望这些内容能对你有所启发。</p>
+            </div>
+        </section>
+
+        <!-- 技能 -->
+        <section id="skills">
+            <h2 class="section-title">技能与兴趣</h2>
+            <div class="skills-container">
+                <span class="skill-tag">Web 开发</span>
+                <span class="skill-tag">UI 设计</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">Git</span>
+                <span class="skill-tag">Linux</span>
+                <span class="skill-tag">创意写作</span>
+                <span class="skill-tag">桌面美化</span>
+                <span class="skill-tag">持续学习中...</span>
+            </div>
+        </section>
+
+        <!-- 项目 -->
+        <section id="projects">
+            <h2 class="section-title">项目展示</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>个人主页</h3>
+                    <p>就是这个网站！使用纯 HTML/CSS 构建的简约风格个人主页，响应式设计，清新配色。</p>
+                    <div class="project-tags">
+                        <span class="project-tag">HTML</span>
+                        <span class="project-tag">CSS</span>
+                        <span class="project-tag">GitHub Pages</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>待添加项目</h3>
+                    <p>这里将展示我的其他项目。如果你有任何想法或合作意向，欢迎联系我！</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Coming Soon</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 联系方式 -->
+        <section id="contact">
+            <h2 class="section-title">联系我</h2>
+            <div class="contact-links">
+                <a href="https://github.com/ahaco3" class="contact-link" target="_blank">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    GitHub
+                </a>
+                <a href="mailto:your.email@example.com" class="contact-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    邮箱
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Ahaco3. 使用 GitHub Pages 构建。</p>
+        <p style="margin-top: 0.5rem; font-size: 0.75rem;">简约 · 清新 · 持续进化</p>
+    </footer>
+</body>
+</html>
